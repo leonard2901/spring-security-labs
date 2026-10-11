@@ -1,0 +1,35 @@
+Starten Sie das Keycloak über das Docker-Compose-Setup:
+
+docker compose up -d
+
+Verifizieren Sie, dass Keycloak läuft indem Sie die Admin-Konsole unter http://localhost:9090 aufrufen.
+Melden Sie sich mit den folgenden Zugangsdaten an:
+admin/admin
+
+Lassen Sie sich ein access Token ausstellen.
+
+curl -v -s -X POST \
+http://localhost:9090/realms/training-app/protocol/openid-connect/token \
+  -d "grant_type=password" \
+  -d "client_id=training-app-frontend" \
+  -d "username=user" \
+  -d "password=password" \
+  -d "scope=openid profile email" | jq .
+
+Für die Authentifizierung können Sie die folgenden Benutzer verwenden:
+
+trainer/password
+user/password
+
+Inspizieren Sie die ausgestellten Tokens, z.B. mittels jwt.io
+
+Bonus: Verwenden Sie das erhaltene Access Token um den Userinfo-Endpoint aufzurufen:
+
+http://localhost:9090/realms/training-app/protocol/openid-connect/userinfo
+
+Das Token muss dazu im HTTP-Header wie folgt übergeben werden:
+
+Authorization: Bearer some-access-token
+
+curl -X GET --location "http://localhost:9090/realms/training-app/protocol/openid-connect/userinfo" \
+    -H "Authorization: Bearer eyJ..."

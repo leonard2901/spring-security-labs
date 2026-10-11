@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <span>Spring Boot</span>
+
+  <button mat-button routerLink="/">Trainings</button>
+  <button mat-button routerLink="/info">Info</button>
+  <button mat-button routerLink="/login"
+          (click)="authService.signIn()"
+          *ngIf="!authService.signedIn()">Login
+  </button>
+  <button mat-button routerLink="/logout"
+          (click)="authService.signOut()"
+          *ngIf="authService.signedIn()">Logout
+  </button>
+  <span class="spacer"></span>
+  <span *ngIf="authService.signedIn()">Angemeldet als "{{ authService.user()?.name }}"</span>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+

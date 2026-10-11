@@ -1,0 +1,51 @@
+Richten Sie mTLS als zusätzliche Authentifizierungsmethode für die Spring Boot Anwendung ein.
+Verwenden Sie dazu die von traefik.me bereitgestellten Zertifikate.
+
+Erstellen Sie unter src/main/resources einen Truststore für die Spring Boot Anwendung mit dem von traefik.me
+bereitgestelltem Schlüsselmaterial:
+
+keytool -import -alias root -file chain.pem -keystore truststore.p12 -storetype PKCS12 -storepass secret -noprompt
+
+Falls keytool nicht lokal verfügbar ist, können Sie den Truststore auch über folgenden Docker-Befehl erstellen:
+
+docker run --rm -v ./:/certs openjdk:8-jre keytool -import -alias root -file /certs/chain.pem -keystore /certs/truststore.p12 -storetype PKCS12 -storepass secret -noprompt
+
+
+Erweitern Sie das dev-Profil der Anwendung über die application.yml wie folgt:
+
+server:
+  ssl:
+    enabled: true
+    client-auth: want # Client-Zertifikat ist optional
+    certificate: classpath:fullchain.pem
+    certificate-private-key: classpath:privkey.pem
+    trust-store: classpath:truststore.p12
+    trust-store-password: secret
+
+Aktivieren Sie den X509AuthenticationFilter in der SecurityFilterChain:
+
+@Bean
+public SecurityFilterChain app(HttpSecurity httpSecurity) throws Exception {
+   return httpSecurity
+  [...]
+  .x509(Customizer.withDefaults())
+  [...]
+}
+
+Legen Sie einen neuen Nutzer “traefik.me” mit Rolle “ADMIN” an:
+
+UserDetails user4 =
+  User.withUsername("traefik.me")
+      .password("{noop}unused")
+      .roles("ADMIN")
+      .build();
+
+Testen Sie den Aufruf eines abgesicherten Endpunktes per cURL mit dem von traefik.me bereitgestellten Zertifikat:
+
+Windows git bash:
+curl -v --cert cert.pem --key privkey.pem "https://app.traefik.me:8080/api/randomnumber?min=0&max=10"
+
+macOS Terminal:
+curl -v --cert cert.pem --key privkey.pem "https://app.traefik.me:8080/api/randomnumber?min=0&max=10"
+
+

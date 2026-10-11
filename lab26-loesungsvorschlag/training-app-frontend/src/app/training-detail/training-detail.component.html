@@ -1,0 +1,28 @@
+<div class="container" *ngIf="training">
+
+  <h1>Training bearbeiten</h1>
+
+  <form class="training-form">
+    <mat-form-field>
+      <mat-label>Ort</mat-label>
+      <input matInput placeholder="Ort" name="ort" [(ngModel)]="training.location">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Thema</mat-label>
+      <input matInput placeholder="Thema" name="thema" [(ngModel)]="training.topic">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Trainer</mat-label>
+      <input matInput placeholder="Trainer" name="trainer" [(ngModel)]="training.instructor.name">
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-raised-button color="warn" routerLink="/">Abbrechen</button>
+      <button mat-raised-button color="primary" (click)="save()">Speichern</button>
+    </div>
+  </form>
+
+  <span>Version: {{ training.version }} Bearbeitet von: {{ training.modifiedBy }} {{ training.modifiedOn }}</span>
+
+  <br>
+  <p>{{ error() }}</p>
+</div>

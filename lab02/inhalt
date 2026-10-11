@@ -1,0 +1,15 @@
+Importieren Sie die Beispiel-Anwendung "training-app-lab02" aus diesem Verzeichnis in Ihre IDE.
+
+Starten Sie die Anwendung mit dem "dev" Profil.
+
+Tipps:
+- In IntelliJ IDEA: "TrainingApplication02" Klasse (Klasse mit 'main' Methode) öffnen,
+  grünen "run" Pfeil betätigen und "modify run configuration" auswählen.
+- In VSCode neue Launch-Configuration anlegen, in JSON ergänzen:
+ "vmArgs": "-Dspring.profiles.active=dev"
+
+ Greifen Sie mit dem Browser auf http://localhost:8080 zu und schauen Sie sich die Anwendung an.
+
+ Greifen Sie mit dem Browser auf http://localhost:8080/h2-console/ zu.
+ Verwenden Sie jdbc:h2:mem:testdb als JDBC URL
+ Loggen Sie sich mit "sa" ohne Passwort ein und schauen Sie sich die Tabellen an.

@@ -1,0 +1,17 @@
+Deaktivieren Sie die CSRF Absicherung für die H2 Konsole.
+
+@Profile("dev")
+@Bean
+public SecurityFilterChain h2FilterChain(HttpSecurity http) throws Exception {
+    return
+    http.securityMatcher(PathRequest.toH2Console())
+       .authorizeHttpRequests(a -> a
+          .anyRequest()
+          .permitAll())
+        .csrf(AbstractHttpConfigurer::disable)
+        .build();
+}
+
+Deaktivieren Sie den CSRF Check für die H2 Konsole
+
+Funktioniert der Login nun?

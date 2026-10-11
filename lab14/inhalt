@@ -1,0 +1,16 @@
+Erstellen Sie eine SecurityFilterChain für die H2 Konsole, die im "dev" Profil aktiviert wird.
+Verwenden Sie die WebSecurityConfig Klasse, um die Bean bereitzustellen.
+
+@Profile("dev")
+@Bean
+public SecurityFilterChain h2FilterChain(HttpSecurity http) throws Exception {
+    return
+    http.securityMatcher(PathRequest.toH2Console())
+       .authorizeHttpRequests(a -> a
+          .anyRequest()
+          .permitAll())
+        .build();
+}
+
+
+Ist der unauthentifizierte Zugriff auf die H2 Login Seite möglich? Ein Login?

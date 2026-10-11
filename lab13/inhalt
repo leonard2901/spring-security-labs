@@ -1,0 +1,50 @@
+Implementieren Sie Spring Security basiertes Auditing, um den Nutzernamen für Anlegen und Ändern von Objekten zu speichern.
+
+Stellen Sie den Nutzernamen basierend auf Spring Security bereit.
+
+@Component
+public class SpringSecurityAuditorAware implements AuditorAware<String>{
+    @Override
+    public Optional<String> getCurrentAuditor() {
+        return Optional.ofNullable(SecurityContextHolder.getContext())
+           .map(SecurityContext::getAuthentication)
+           .filter(Authentication::isAuthenticated)
+           .map(Authentication::getPrincipal)
+           .map(User.class::cast)
+           .map(User::getUsername);
+    }
+}
+
+Erweitern Sie die Training Entity um passende Felder und Getter/Setter.
+
+@ReadOnlyProperty
+@CreatedBy
+@Column(name="COL_CREATED_BY", updatable = false)
+private String createdBy;
+
+@ReadOnlyProperty
+@LastModifiedBy
+@Column(name="COL_MODIFIED_BY")
+private String modifiedBy;
+
+
+Zur Anzeige erweitern Sie das TrainingDTO um passende Felder und Getter/Setter
+
+private String createdBy;
+private String modifiedBy;
+
+Bauen Sie anschließend das Projekt vollständig neu, damit die Klassen in jedem Fall korrekt generiert werden.
+
+Erstellen Sie eine Datenbank-Migration in src/main/resources/db/migration mit Namen V1_0_1__auditing.sql
+
+ALTER TABLE TBL_TRAININGS ADD COLUMN COL_CREATED_BY VARCHAR(255) AFTER COL_CREATED_ON;
+ALTER TABLE TBL_TRAININGS ADD COLUMN COL_MODIFIED_BY VARCHAR(255) AFTER COL_MODIFIED_ON;
+
+
+Zeigen Sie die Informationen im "Bearbeiten" Template (edit.html) an.
+Beispiele für den Zugriff auf die Felder
+
+
+[[${training.createdBy}]]
+
+<span th:text="${training.modifiedBy}"></span>

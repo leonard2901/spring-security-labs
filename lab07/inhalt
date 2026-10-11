@@ -1,0 +1,5 @@
+Öffnen Sie im Browser die URL  http://localhost:8080/logout
+
+Verwenden Sie die Dev-Tools im Browser und beobachten Sie die Cookie Header.
+
+Melden Sie sich ab, beobachten Sie dabei die Cookie Werte.

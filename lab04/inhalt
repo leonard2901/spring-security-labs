@@ -1,0 +1,12 @@
+Stoppen Sie die Anwendung.
+
+Fügen Sie die spring-boot-starter-security Abhängigkeit hinzu.
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+Je nach IDE ist ggf. ein Maven-Reload erforderlich.
+
+Starten Sie die Anwendung mit dem "dev" Profil.

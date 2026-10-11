@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/header :: head}">
+   <title>Info</title>
+</head>
+<body>
+
+<span th:replace="~{fragments/header :: body/content()}"></span>
+
+<main role="main" class="container">
+
+   <div class="starter-template">
+      <h1 th:text="${heading}">Nutzerinfos</h1>
+
+      <p>
+         <span sec:authorize="isAnonymous()">Nicht angemeldet.</span>
+         <span sec:authorize="isAuthenticated()">Angemeldet.</span>
+         <span sec:authorize="isFullyAuthenticated()">Frisch angemeldet.</span>
+         <span sec:authorize="isRememberMe()">Remember me.</span>
+         <br />
+         Username:
+         <span sec:authentication="name"></span> <br/>
+         <span th:text="${#authentication?.name}"></span> <!-- -->
+
+      </p>
+   </div>
+
+</main><!-- /.container -->
+
+<span th:replace="~{fragments/footer :: body/content()}"></span>
+
+</body>
+</html>

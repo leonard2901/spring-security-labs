@@ -1,0 +1,18 @@
+Deaktivieren Sie den Frame Header die H2 Konsole
+
+@Profile("dev")
+@Bean
+public SecurityFilterChain h2FilterChain(HttpSecurity http) throws Exception {
+   return http.securityMatcher(PathRequest.toH2Console())
+      .authorizeHttpRequests(a -> a
+         .anyRequest()
+         .permitAll())
+      .csrf(AbstractHttpConfigurer::disable)
+      .headers(h -> h
+         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+      .build();
+}
+
+Funktioniert der Login nun?
+
+Wie verhält sich der Rest der Anwendung?

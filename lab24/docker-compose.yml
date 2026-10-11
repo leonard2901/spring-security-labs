@@ -1,0 +1,21 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    environment:
+      KC_DB: dev-file
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      PROXY_ADDRESS_FORWARDING: 'true'
+      KC_HTTP_PORT: 9090
+    command:
+      - 'start-dev'
+      - '-Dkeycloak.migration.action=import'
+      - '-Dkeycloak.migration.provider=dir'
+      - '-Dkeycloak.migration.realmName=training-app'
+      - '-Dkeycloak.migration.dir=/tmp/import'
+      - '-Dkeycloak.migration.strategy=IGNORE_EXISTING'
+    volumes:
+      - './keycloak:/tmp/import'
+    ports:
+      - '127.0.0.1:9090:9090'
+    restart: unless-stopped

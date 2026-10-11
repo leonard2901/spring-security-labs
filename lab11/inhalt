@@ -1,0 +1,31 @@
+Geben Sie den Nutzern Rollen, einer soll die 'ADMIN' Rolle erhalten.
+
+Geben Sie auf der Info-Seite die Rollen des aktuellen Users aus.
+
+Beachten Sie: Bei Zugriff auf SpEL Objekte, dass diese im nicht-authentifizierten Fall ggf. nicht gesetzt sind.
+Tipps:
+- Mit ?. ist null-safe Dereferenzierung in Thymeleaf möglich
+- Zur Verwendung von SpEL #authorization.expression muss eine Authentifizierung vorhanden sein
+
+<p>
+   Roles:
+   <span sec:authentication="authorities"></span><br/>
+   <span th:text="${#authentication?.authorities}"></span>
+   <br />
+   <span>
+    <span sec:authorize="hasRole('ADMIN')">Admin Rolle!</span>
+    <span th:if="${#authentication?.principal != null and #authorization.expression('hasRole(''ADMIN'')')}">
+      Admin Rolle!</span>
+  </span>
+</p>
+
+
+Verbergen Sie administrative Oberflächenelemente für nicht-ADMINs
+
+<a sec:authorize="hasRole('ADMIN')" class="btn btn-warning" th:href="@{/trainings/{id}/edit(id=${training.id})}">
+   Bearbeiten
+</a>
+
+
+Kann man trotzdem ein Training bearbeiten, wenn man die URL kennt?
+Testen Sie direkt eine URL aufzurufen bspw. http://localhost:8080/trainings/1/edit

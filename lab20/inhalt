@@ -1,0 +1,32 @@
+Erlauben Sie HTTP Basic beim Zugriff auf den Actuator
+
+Der Health-Check soll weiterhin unauthentifiziert möglich sein
+
+Deaktivieren Sie die Session-Verwendung und CSRF für die Endpoints
+
+
+@Bean
+public SecurityFilterChain endpoint(HttpSecurity http) throws Exception {
+    return http.securityMatcher(EndpointRequest.toAnyEndpoint().excluding(HealthEndpoint.class))
+       .authorizeHttpRequests(a -> a
+           .anyRequest().hasRole("ENDPOINT_ADMIN"))
+       .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+       .csrf(AbstractHttpConfigurer::disable)
+       .httpBasic(Customizer.withDefaults())
+       .build();
+}
+
+Legen Sie einen passenden Nutzer an.
+
+UserDetails actuator =
+User.withUsername("actuator")
+   .password("{noop}actuator")
+   .roles("ENDPOINT_ADMIN")
+   .build();
+
+
+Testen Sie den Zugriff mit cURL oder httpie
+
+$ curl --user actuator:actuator http://localhost:8080/actuator/info
+$ http --auth actuator:actuator :8080/actuator/info
+

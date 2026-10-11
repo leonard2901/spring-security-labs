@@ -1,0 +1,32 @@
+Erstellen Sie eine Spring Boot Anwendung "Training".
+Gehen Sie dazu auf https://start.spring.io/ und verwenden folgende Parameter
+- Maven Build
+- Java Language
+- Spring Boot Version (3.3.x)
+- Packaging als JAR
+- Java 21
+
+mit folgenden Abhängigkeiten
+- Web MVC
+- Actuator
+- DevTools
+- Thymeleaf
+- Spring Data JPA
+- Spring Configuration Processor
+- H2 Database
+- Flyway
+
+Sie können auch folgenden Link verwenden:
+https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.1&packaging=jar&jvmVersion=21&groupId=de.trion.example&artifactId=training&name=training&description=Training%20App&packageName=de.trion.example.training&dependencies=web,thymeleaf,data-jpa,h2,flyway,actuator,devtools,configuration-processor
+
+Importieren Sie das Ergebnis in Ihre IDE und starten Sie die Anwendung.
+
+Tipps:
+- In IntelliJ IDEA: "TrainingApplication" Klasse (Klasse mit 'main' Methode) öffnen,
+  grünen "run" Pfeil betätigen oder Ctrl-Shift-F10
+- In VSCode mit Java Extension: "TrainingApplication" Klasse (Klasse mit 'main' Methode)
+  öffnen, oben rechts Pfeil "run Java" betätigen
+
+
+Greifen Sie auf http://localhost:8080 zu.
+Eine "Whitelabel Error Page" ist erwartetes Ergebnis.

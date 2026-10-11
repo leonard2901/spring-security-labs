@@ -1,0 +1,9 @@
+Aktivieren Sie @EnableMethodSecurity an der WebSecurityConfig
+
+Sichern Sie die administrativen Methoden für Trainings ab
+
+@PreAuthorize("hasRole('ADMIN')")
+public Training save(Training training)
+{
+    return trainingRepository.save(training);
+}

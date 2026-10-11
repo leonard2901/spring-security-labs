@@ -1,0 +1,17 @@
+Verwenden Sie statt einer H2 Datenbank MariaDB.
+
+Im Ordner 'docker' finden Sie ein docker-compose Setup, mit dem Sie die Datenbank starten können.
+
+Sie benötigen folgende zusätzliche Abhängigkeiten im pom.xml
+
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-mysql</artifactId>
+</dependency>
+
+Die Spring Boot Anwendung kann dann mit dem Spring Profil 'mariadb' gestartet werden.

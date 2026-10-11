@@ -1,0 +1,30 @@
+Konfigurieren Sie die Anwendung als Resource Server.
+
+Erweitern Sie dazu das Dev-Profil der application.yml um folgende Konfiguration:
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/training-app
+
+Erweitern Sie nun die vorgegebene SecurityFilterChain "apiSecurityFilterChain",
+um die Endpunkte /api/** abzusichern.
+Ein POST gegen /api/trainings soll nur für Benutzer mit der Rolle "ADMIN" zugänglich sein.
+Alle anderen Endpunkte sollen für alle authentifizierten Benutzer zugänglich sein.
+
+Deaktivieren Sie zudem den Schutz gegen CSRF und konfigurieren Sie die Anwendung so, dass sie
+keine stateful Sessions verwendet.
+
+.csrf(AbstractHttpConfigurer::disable)
+.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+Testen Sie zunächst einen unauthentifizierten Aufruf von z.B. GET http://localhost:8080/api/trainings/locations
+
+Lassen Sie sich anschließend ein Token ausstellen und fügen Sie dieses als Authorization-Header
+dem Request hinzu: "Authorization: Bearer <access-token>"
+Damit sollte der Zugriff auf die geschützten Endpunkte möglich sein.
+
+curl -X GET --location "http://localhost:8080/api/trainings/locations" \
+    -H "Authorization: Bearer eyJ..."

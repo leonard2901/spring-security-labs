@@ -1,0 +1,36 @@
+Erstellen Sie eine separate @Configuration Klasse mit Namen WebSecurityConfig.
+Verschieben Sie die @EnableWebSecurity Annotation an die neue Klasse.
+
+Stellen Sie eine @Bean vom Typ InMemoryUserDetailsManager bereit.
+Dem Konstruktor des InMemoryUserDetailsManager können Sie UserDetails Instanzen mitgeben.
+
+Erstellen Sie einen oder mehrere User mit festen Passwörtern.
+
+UserDetails user =
+   User.withDefaultPasswordEncoder() // nicht in Produktion nutzen
+   .username("user")
+   .password("password")
+   .build();
+new InMemoryUserDetailsManager(user);
+
+
+Experimentieren Sie mit vorgehashten Passwörtern in verschiedenen Varianten.
+Sie können dazu Online-Encoder nehmen, wie z.B.
+
+- https://bcrypt.online/
+- https://gchq.github.io/CyberChef/#recipe=Bcrypt(10)
+
+
+Beispiel User:
+
+UserDetails user2 =
+   User.withUsername("thomas")
+      .password("{noop}password") // Gehashtes Password mit "kein"-Hashing
+      .build();
+
+UserDetails user3 =
+   User.withUsername("trainer")
+      .password("{bcrypt}$2a$10$TeUIcgYkrlr.8AgpgWOOKe1LqqD6ThV9w59VTxxCiaz3Y1FZah8Sq")
+      .build();
+
+Melden Sie sich jeweils als angelegten User an.

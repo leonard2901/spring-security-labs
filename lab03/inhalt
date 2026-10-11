@@ -1,0 +1,15 @@
+Validieren Sie die unterstützenden Sicherheitsfeatures der Anwendung.
+
+Starten Sie die Anwendung mit dem "dev" Profil.
+
+- Legen Sie ein Training neu an
+-- Rufen Sie das neu erzeugte Training auf
+-- Beobachten Sie in der URL, dass eine UUID verwendet wird
+- Öffnen Sie die Bearbeitungsansicht des Trainings
+-- Beobachten Sie, dass der Erstellzeitpunkt und Bearbeitungszeitpunkt gefüllt sind
+- Bearbeiten Sie das Training und speichern es
+- Öffnen Sie die Bearbeitungsansicht des Trainings erneut
+-- Beobachten Sie, dass der Bearbeitungszeitpunkt und die Version sich geändert haben
+- Öffnen Sie in einem zweiten Browserfenster die Bearbeitungsansicht des selben Trainings und speichern Sie eine Änderung
+- Versuchen Sie nun eine Änderung im ersten Browserfenster zu speichern
+-- Beobachten Sie, wie die Anwendung den Konflikt bemerkt

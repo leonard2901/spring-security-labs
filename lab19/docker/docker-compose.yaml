@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:10.6
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+      TZ: Europe/Berlin
+    ports:
+      - "3306:3306"
+
+
+  adminer:
+    image: adminer
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer.localhost`)"
+    environment:
+      - ADMINER_DEFAULT_DB_NAME=app
+      - ADMINER_DEFAULT_DB_HOST=mariadb #this is documented
+      - ADMINER_DEFAULT_SERVER=mariadb #this works
+    ports:
+      - "8081:8080"

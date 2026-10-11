@@ -1,0 +1,18 @@
+Ergänzen Sie das fehlende Mapping der im JWT enthaltenen Rollen auf Spring Security Rollen in der WebSecurityConfig:
+
+private JwtAuthenticationConverter jwtAuthenticationConverter() {
+    Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter = new KeycloakRolesJwtGrantedAuthoritiesConverter();
+    JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+    return jwtAuthenticationConverter;
+}
+
+Konfigurierens sie die SecurityFilterChain entsprechend:
+
+// Authentication
+.oauth2ResourceServer(o ->
+        o.jwt(j -> j.jwtAuthenticationConverter(jwtAuthenticationConverter())
+        )
+)
+
+Testen Sie das Bearbeiten/Hinzufügen erneut.

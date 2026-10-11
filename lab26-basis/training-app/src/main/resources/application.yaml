@@ -1,0 +1,54 @@
+logging:
+  level:
+    de.trion.trainingapp: info
+    org.springframework.security: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  data:
+    web:
+      pageable:
+        default-page-size: 4
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password: ''
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/dev-migration
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password: ''
+
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/dev-migration

@@ -1,0 +1,18 @@
+Falls Sie bereits angemeldet sind:
+Stoppen Sie die Anwendung, beenden Sie Ihren Webbrowser und starten beides neu.
+
+Verwenden Sie die Dev-Tools in Ihrem Browser und beobachten die HTTP-Requests und -Responses
+während Sie sich neu einloggen.
+Kopieren Sie sich den JSESSIONID Cookie Wert.
+
+Starten Sie die Anwendung neu - sind Sie abgemeldet?
+
+Funktioniert ein cURL/httpie Request mit dem Cookie?
+
+curl --cookie "JSESSIONID=EF35173E80A03164384C07F3481E26BF" http://localhost:8080/trainings
+oder
+http :8080/trainings Cookie:JSESSIONID=EF35173E80A03164384C07F3481E26BF
+
+Beenden Sie den Browser und starten ihn neu - sind Sie abgemeldet?
+
+Löschen Sie die Cookies im Browser - sind Sie abgemeldet?

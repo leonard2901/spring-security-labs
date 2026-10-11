@@ -1,0 +1,13 @@
+Aktivieren Sie “debug” in der @EnableWebSecurity Annotation.
+Diese wird zusätzlich zu @SpringBootApplication an der Klasse der `main` Methode verwendet.
+Starten Sie die Anwendung neu, beobachten Sie die Ausgabe bei Zugriffen.
+
+Erhöhen Sie das Loglevel für Spring-Security auf “debug”.
+Verwenden Sie dazu die "application.yaml" oder "application.properties" Dateien.
+
+Beispiel in YAML:
+
+logging.level:
+  org.springframework.security: debug
+
+Beobachten Sie nach einem Neustart auch hier das Verhalten.

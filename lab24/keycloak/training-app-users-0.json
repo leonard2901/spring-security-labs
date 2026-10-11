@@ -1,0 +1,56 @@
+{
+  "realm" : "training-app",
+  "users" : [ {
+    "id" : "9417c22a-e219-4d9c-8b5b-8a2daa84f966",
+    "username" : "trainer",
+    "firstName" : "Demo",
+    "lastName" : "Trainer",
+    "email" : "trainer@example.com",
+    "emailVerified" : false,
+    "createdTimestamp" : 1720596860225,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "312f98e4-af2a-4c5d-8149-c565ea9780ac",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1720596871690,
+      "secretData" : "{\"value\":\"NW+1ycRDSKfUwiRooh/ji/87d4uVz1cMa01Odu3v+JhsRyysNPFyde6BCDgDzPKcsx36Onb77QDld0gdcSLUUQ==\",\"salt\":\"5vCvmmNYsMWNunmDbz+SIw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-training-app" ],
+    "clientRoles" : {
+      "training-app-frontend" : [ "ADMIN" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "248794d4-acf5-40fe-8234-353ea907fd6c",
+    "username" : "user",
+    "firstName" : "Demo",
+    "lastName" : "User",
+    "email" : "user@example.com",
+    "emailVerified" : false,
+    "createdTimestamp" : 1720596765403,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "a146a93f-8958-4bfa-b26d-be53734d522c",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1720596793243,
+      "secretData" : "{\"value\":\"cWEnahMzvvwMyTM98NrnrfQ0mFBpldIAkEwAzOp4QLQ1Lgxgc+nLL+aoy0enByOO5LeIwW907NABShbLMzLl+w==\",\"salt\":\"DGZpc6SFja9bo5NUOjG5Cw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-training-app" ],
+    "clientRoles" : {
+      "training-app-frontend" : [ "USER" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

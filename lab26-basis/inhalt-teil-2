@@ -1,0 +1,18 @@
+Starten Sie die Angular Anwendung in diesem Lab:
+
+$ cd training-app-frontend
+$ npm install
+$ ng serve
+
+Falls der Befehl ng nicht gefunden wird, installieren Sie Angular CLI global:
+$ npm install -g @angular/cli@17
+
+Testen Sie die Anwendung im Browser unter http://localhost:4200
+
+Für die Authentifizierung können Sie die folgenden Benutzer verwenden:
+
+trainer/password (Rolle: ADMIN)
+user/password (Rolle: USER)
+
+Werden die Trainings erfolgreich geladen?
+Wieso nicht?

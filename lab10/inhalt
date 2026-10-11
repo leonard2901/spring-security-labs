@@ -1,0 +1,37 @@
+Erweitern Sie die Anwendung um die Thymeleaf Spring Security Integration.
+
+<dependency>
+   <groupId>org.thymeleaf.extras</groupId>
+   <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+</dependency>
+
+Nutzen Sie die Integration, um in der Navigation einen Login/Logout Link in Abhängigkeit vom Anmeldezustand des Users anzuzeigen.
+
+Das Template befindet sich in 'src/main/resources/templates/fragments/header.html'
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+Der Zugriff auf den Anmeldezustand können Sie durch verschiedene Optionen umsetzen:
+
+<span sec:authorize="isAuthenticated()">Angemeldet.</span>
+<span sec:authorize="isAnonymous()">Nicht angemeldet.</span>
+
+Die Links auf den Login bzw. Logout könnten so aussehen:
+
+<a class="nav-link" href="#" th:href="@{/login}">Login</a>
+<a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+
+
+Editieren Sie die "info.html" Seite und geben Information zum Anmeldezustand und dem Nutzer aus.
+
+<p>
+    <span sec:authorize="isAnonymous()">Nicht angemeldet.</span>
+    <span sec:authorize="isAuthenticated()">Angemeldet.</span>
+    <span sec:authorize="isFullyAuthenticated()">Frisch angemeldet.</span>
+    <span sec:authorize="isRememberMe()">Remember me.</span>
+    <br />
+    Username:
+    <span sec:authentication="name"></span>    
+</p>

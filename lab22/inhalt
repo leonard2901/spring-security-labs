@@ -1,0 +1,21 @@
+Konfigurieren Sie TLS für die Spring Boot Anwendung mit dem von traefik.me bereitgestelltem Schlüsselmaterial.
+Laden Sie dazu zunächst folgende Dateien herunter:
+
+https://traefik.me/privkey.pem
+https://traefik.me/fullchain.pem
+https://traefik.me/chain.pem
+
+Legen Sie diese unter labXX/training-app/src/main/resources ab.
+
+Erweitern Sie anschließend das dev-Profil der Anwendung über die application.yml wie folgt:
+
+server:
+  ssl:
+    enabled: true
+    certificate: classpath:fullchain.pem
+    certificate-private-key: classpath:privkey.pem
+
+Starten Sie die Anwendung und rufen Sie https://app.traefik.me:8080 auf.
+
+Sollte beim Aufruf ein Fehler auftreten, z.B. "SSL_ERROR", können Sie probieren die Seite in einem privaten Browserfenster
+aufzurufen, den DNS Cache zu leeren (Windows: ipconfig /flushdns) oder temporär einen anderen DNS (z.B.: quad9 - 9.9.9.9) zu verwenden.

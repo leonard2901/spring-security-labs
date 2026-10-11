@@ -1,0 +1,35 @@
+Fügen Sie spring-boot-starter-security-test als Abhängigkeit hinzu
+
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-security-test</artifactId>
+   <scope>test</scope>
+</dependency>
+
+Lassen Sie alle Tests laufen - sind diese rot?
+
+Beheben Sie die Testfehler schrittweise, verwenden Sie dazu Authentifizierungsinformationen
+
+@WithMockUser
+@WithMockUser(username="admin", roles = {"ADMIN"}, authorities = {})
+
+.with(httpBasic("endpoint","endpoint")))
+
+
+Für einige Fälle ist ein gültiges CSRF Token notwendig:
+
+.with(csrf())
+
+
+Ergänzen Sie auch Tests, die fehlende/fehlerhafte Security prüfen!
+
+@WithAnonymousUser
+
+.with(csrf().useInvalidToken())
+
+.andExpect(status().isUnauthorized());
+.andExpect(status().isForbidden());
+
+
+Um alle Test laufen zu lassen ist ggf. notwendig die Testdatenbank neu zu erzeugen:
+@AutoConfigureTestDatabase(replace = Replace.ANY)

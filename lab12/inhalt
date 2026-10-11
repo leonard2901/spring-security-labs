@@ -1,0 +1,24 @@
+Greifen Sie im Controller auf die Authentifizierungs- und Autorisierungsinfos zu.
+
+Verwenden Sie den InfoController mit der 'info()' Methode.
+Experimentieren Sie mit verschiedenen Varianten des Zugriffs.
+
+
+@RequestMapping("/info")
+public ModelAndView info(Principal p, Authentication a) {
+...
+}
+
+
+@RequestMapping("/info")
+public void info(@AuthenticationPrincipal UserDetails principal,
+  @CurrentSecurityContext SecurityContext context) {
+...
+}
+
+
+final SecurityContext context = SecurityContextHolder.getContext();
+final Authentication a = context.getAuthentication();
+final Object p = a.getPrincipal();
+logger.info("{}: prin: {}, auth: {}", a.getName(), p, a.getAuthorities());
+

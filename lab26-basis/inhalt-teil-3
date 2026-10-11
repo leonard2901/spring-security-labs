@@ -1,0 +1,15 @@
+Ergänzen Sie die CORS-Konfiguration für Spring Security in der Filter Chain um OPTIONS-Anfragen zu erlauben.
+
+//...
+.cors(Customizer.withDefaults())
+.build();
+
+Für die Authentifizierung können Sie die folgenden Benutzer verwenden:
+
+trainer/password (Rolle: ADMIN)
+user/password (Rolle: USER)
+
+Loggen Sie sich mit verschiedenen Benutzern ein und testen Sie die Zugriffsrechte.
+Klappt das Bearbeiten und Anlegen von Trainings wie erwartet?
+Wieso nicht?
+

@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.container {
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: .5rem;
+}
+
+table {
+  width: 100%;
+}
+
+.footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-training-form,
+.training-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}

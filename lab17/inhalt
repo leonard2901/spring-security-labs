@@ -1,0 +1,20 @@
+Fügen Sie eine FilterChain für die Anwendung mit Login-/out hinzu
+
+
+@Bean
+public SecurityFilterChain app(HttpSecurity httpSecurity) throws Exception {
+   return httpSecurity
+       .securityMatcher("/**")
+       .authorizeHttpRequests(a -> a
+          .requestMatchers(HttpMethod.POST, "/trainings/**").hasRole("ADMIN")
+          .requestMatchers("/trainings/*/edit").hasRole("ADMIN")
+          .anyRequest().permitAll()
+       )
+       .formLogin(Customizer.withDefaults())
+       .logout(l -> l.logoutSuccessUrl("/"))
+       .httpBasic(Customizer.withDefaults())
+       .anonymous(a -> a.principal(new User("anonymous","", Collections.emptyList())))
+      .build();
+}
+
+Funktioniert alles?

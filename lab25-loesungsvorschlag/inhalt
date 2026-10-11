@@ -1,0 +1,51 @@
+Ergänzen Sie in der pom.xml den Starter für den Resource Server:
+
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId>
+</dependency>
+
+Erweitern Sie das dev-Profil der application.yaml:
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/training-app
+
+
+Aktivieren Sie die JWT-Authentifizierung in der SecurityFilterChain "app":
+
+.oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()))
+
+Ergänzen Sie folgende Bean, um Token per URL-Param übergeben zu können:
+
+// Unsicher! Nur für dieses Beispiel!
+@Bean
+BearerTokenResolver bearerTokenResolver() {
+    var resolver = new DefaultBearerTokenResolver();
+    resolver.setAllowUriQueryParameter(true);
+    return resolver;
+}
+
+Lassen Sie sich ein Access Token ausstellen und speichern Sie es in einer Variablen:
+
+TOKEN=$(curl -s -X POST http://localhost:9090/realms/training-app/protocol/openid-connect/token \
+  -d "grant_type=password" \
+  -d "client_id=training-app-frontend" \
+  -d "username=trainer" \
+  -d "password=password" \
+  -d "scope=openid profile email" | jq -r .access_token)
+
+Öffnen Sie die Info-Seite im Browser:
+
+open "http://localhost:8080/info?access_token=$TOKEN"
+
+- Welche Authorities haben Sie?
+- Welchen Nutzername haben Sie?
+- Können Sie Trainings bearbeiten?
+
+Bonus: Sorgen Sie dafür, dass statt der UUID der Keycloak-Username angezeigt wird:
+
+spring.security.oauth2.resourceserver.jwt.principal-claim-name: preferred_username
